@@ -1,146 +1,93 @@
-# Lab Vision Grid - Desktop App Setup Guide
 
-## Prerequisites
+# ⚡ Lab Vision Grid - Quick Start (5 Minutes)
+
+## For experienced developers who just need the commands
+
+### Prerequisites Installed? ✅
 - Python 3.8+
-- Node.js / npm
-- pip (Python package manager)
+- Node.js & npm
+- Git
 
-## Installation
-
-### 1. Install Python Dependencies
+### 1️⃣ Clone & Navigate
 ```bash
-pip install -r requirements.txt
+git clone <YOUR_GIT_URL>
+cd lab-vision-grid-main
 ```
 
-### 2. Install Node Dependencies
+### 2️⃣ Python Setup
 ```bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# Mac/Linux
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3️⃣ Install Dependencies
+```bash
+pip install -r requirements.txt
 npm install
 ```
 
-## Running the Desktop App
+### 4️⃣ Configure (Choose One)
 
-### Option 1: Simple (Recommended for beginners)
+**Option A: Single Machine (Development)**
+```bash
+# Create .env file in project root:
+echo DEBUG=true > .env
+echo FLASK_PORT=5000 >> .env
+echo FLASK_HOST=localhost >> .env
+```
+
+**Option B: Local Network (Teacher/Student)**
+```bash
+python setup_local_network.py
+# Follow prompts
+```
+
+**Option C: Remote Control**
+```bash
+python setup_remote_control.py
+# Follow prompts
+```
+
+### 5️⃣ Run the Project
+
+**Development Mode (2 terminals):**
+
+Terminal 1:
+```bash
+npm run dev
+# Access: http://localhost:8080
+```
+
+Terminal 2:
+```bash
+python main.py
+# Runs on http://localhost:5000
+```
+
+**OR Desktop App (Single command):**
 ```bash
 npm run desktop
 ```
-This will:
-1. Build your React app (`npm run build`)
-2. Start the Python backend with pywebview
-3. Open a desktop window with your app
 
-### Option 2: Advanced (Background Flask thread)
-```bash
-npm run desktop:advanced
-```
-Uses threading for better control and separate Flask + pywebview instances.
+### 6️⃣ Success! 🎉
+- Frontend: http://localhost:8080
+- Backend: http://localhost:5000
 
-## Development Workflow
+---
 
-### During Development:
-1. **Terminal 1** - Start the React dev server:
-   ```bash
-   npm run dev
-   ```
-   Access at: `http://localhost:8080`
+## Common Issues
 
-2. **Terminal 2** - Start a separate Flask dev server:
-   ```bash
-   python -m flask --app main:app run --port 5000
-   ```
-   Access at: `http://localhost:5000`
+| Issue | Fix |
+|-------|-----|
+| `python: command not found` | Use `python3` instead (Mac/Linux) |
+| `(venv)` not showing | Reactivate: `source venv/bin/activate` (Mac/Linux) or `venv\Scripts\activate` (Windows) |
+| Port 5000/8080 in use | Kill other processes, or change port in `.env` |
+| Dependencies fail to install | Update pip: `pip install --upgrade pip` then try again |
+| Module not found | Virtual environment not activated - check `(venv)` prefix |
 
-### Build Production Desktop App:
-```bash
-npm run build
-npm run desktop
-```
-
-## Python Integration
-
-### Calling Python Endpoints from React:
-
-```typescript
-// src/api/client.ts (or similar)
-const API_BASE = 'http://localhost:5000/api';
-
-export async function getPythonInfo() {
-  const response = await fetch(`${API_BASE}/python-info`);
-  return response.json();
-}
-
-export async function getSystemInfo() {
-  const response = await fetch(`${API_BASE}/system-info`);
-  return response.json();
-}
-```
-
-### Using in React:
-```typescript
-import { useEffect, useState } from 'react';
-import { getPythonInfo } from '@/api/client';
-
-export function PythonIntegration() {
-  const [info, setInfo] = useState(null);
-
-  useEffect(() => {
-    getPythonInfo().then(setInfo);
-  }, []);
-
-  return <div>{JSON.stringify(info)}</div>;
-}
-```
-
-## API Endpoints Available
-
-- `GET /api/health` - Health check
-- `GET /api/python-info` - Python version and system info
-- `GET /api/system-info` - Detailed system information
-- `POST /api/file-operations/list` - List files in directory
-- `POST /api/execute-command` - Execute shell commands
-
-## Packaging as Executable
-
-To create a standalone .exe for Windows:
-
-```bash
-# Install PyInstaller
-pip install pyinstaller
-
-# Create executable
-pyinstaller --onefile --windowed --name "Lab-Vision-Grid" main.py
-
-# Find executable in dist/Lab-Vision-Grid.exe
-```
-
-## Troubleshooting
-
-**Port 5000 already in use:**
-```bash
-# Find and kill process
-netstat -ano | findstr :5000
-taskkill /PID <PID> /F
-```
-
-**React build not updating:**
-```bash
-npm run build
-```
-
-**Python module not found:**
-```bash
-pip install -r requirements.txt
-```
-
-## Directory Structure
-```
-project/
-├── src/                    # React frontend
-├── dist/                   # Built React app (created by npm run build)
-├── backend/               # Python backend modules
-│   ├── api.py            # API endpoints
-│   └── __init__.py
-├── main.py                # Entry point for desktop app
-├── desktop_app.py         # Alternative advanced entry point
-├── requirements.txt       # Python dependencies
-└── package.json           # Node dependencies
-```
+---
