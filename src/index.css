@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Remote Desktop Lab Management - Design System
+   Deep Navy Blue + Electric Blue Dark Theme
+   All colors in HSL format */
+
+@layer base {
+  :root {
+    /* Dark mode by default - Deep Navy Theme */
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 40% 96%;
+
+    /* Electric Blue Primary */
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 6%;
+
+    --secondary: 222 47% 14%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 222 30% 16%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 222 47% 6%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 210 40% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 222 47% 6%;
+
+    --border: 222 30% 18%;
+    --input: 222 30% 14%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar - Darker Navy */
+    --sidebar-background: 222 47% 5%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 222 47% 6%;
+    --sidebar-accent: 222 47% 12%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 222 30% 14%;
+    --sidebar-ring: 217 91% 60%;
+
+    /* Custom Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 45%));
+    --gradient-card: linear-gradient(180deg, hsl(222 47% 10%), hsl(222 47% 8%));
+    --gradient-glow: radial-gradient(ellipse at center, hsl(217 91% 60% / 0.15), transparent 70%);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px hsl(222 47% 4% / 0.5);
+    --shadow-md: 0 4px 16px hsl(222 47% 4% / 0.6);
+    --shadow-lg: 0 8px 32px hsl(222 47% 4% / 0.7);
+    --shadow-glow: 0 0 20px hsl(217 91% 60% / 0.3);
+  }
+
+  .dark {
+    /* Same as root - dark mode is default */
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50;
+  }
+
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .screen-preview {
+    @apply relative overflow-hidden rounded-lg border border-border/50 bg-card transition-all duration-300;
+  }
+
+  .screen-preview:hover {
+    @apply border-primary/50;
+    box-shadow: 0 0 20px hsl(217 91% 60% / 0.2);
+  }
+
+  .nav-item {
+    @apply flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground transition-all duration-200;
+  }
+
+  .nav-item:hover {
+    @apply bg-sidebar-accent text-sidebar-foreground;
+  }
+
+  .nav-item.active {
+    @apply bg-primary/10 text-primary border-l-2 border-primary;
+  }
+
+  .status-dot {
+    @apply w-2 h-2 rounded-full;
+  }
+
+  .status-online {
+    @apply bg-success;
+    box-shadow: 0 0 8px hsl(142 76% 36% / 0.6);
+  }
+
+  .status-offline {
+    @apply bg-muted-foreground/50;
+  }
+
+  .btn-glow {
+    @apply relative overflow-hidden;
+  }
+
+  .btn-glow::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: var(--gradient-glow);
+  }
+
+  .btn-glow:hover::before {
+    @apply opacity-100;
+  }
+}

@@ -1,0 +1,61 @@
+# ==================== Web Framework ====================
+fastapi==0.104.1                    # Modern Python API framework
+uvicorn[standard]==0.24.0           # ASGI server
+pydantic==2.5.0                     # Data validation
+python-multipart==0.0.6             # Form data handling
+pywebview==5.1                      # Desktop app
+flask==3.0.0                        # Legacy support (optional)
+flask-cors==4.0.0                   # CORS support
+flask-socketio==5.3.5               # WebSocket support for Flask
+python-socketio==5.10.0             # SocketIO client library
+python-engineio==4.8.0              # Engine.IO protocol
+websocket-client==1.7.0             # WebSocket client for student agent
+
+# ==================== Remote Control ====================
+pillow==10.1.0                      # Image processing (screenshots)
+pyautogui==0.9.53                   # Mouse/keyboard automation
+pygetwindow==0.0.9                  # Window management (Windows)
+
+# ==================== Database ====================
+sqlalchemy==2.0.23                  # ORM
+alembic==1.13.0                     # Database migrations
+psycopg2-binary==2.9.9              # PostgreSQL adapter
+pymongo==4.6.0                      # MongoDB (optional)
+
+# ==================== Authentication & Security ====================
+pyjwt==2.8.1                        # JWT tokens
+passlib[bcrypt]==1.7.4              # Password hashing
+python-jose[cryptography]==3.3.0    # JWT cryptography
+bcrypt==4.1.1                       # Password encryption
+
+# ==================== Caching & Sessions ====================
+redis==5.0.1                        # Redis client
+hiredis==2.2.3                      # Redis parser (faster)
+python-dotenv==1.0.0                # Environment variables
+
+# ==================== Background Tasks ====================
+celery==5.3.4                       # Task queue
+flower==2.0.1                       # Celery monitoring
+
+# ==================== Testing ====================
+pytest==7.4.3                       # Testing framework
+pytest-asyncio==0.21.1              # Async test support
+httpx==0.25.2                       # HTTP client for testing
+
+# ==================== Monitoring & Logging ====================
+python-json-logger==2.0.7           # JSON logging
+prometheus-client==0.19.0           # Metrics
+structlog==23.2.0                   # Structured logging
+
+# ==================== Utilities ====================
+requests==2.31.0                    # HTTP client
+aiofiles==23.2.1                    # Async file operations
+python-dateutil==2.8.2              # Date utilities
+pytz==2023.3                        # Timezone support
+
+# ==================== Code Quality ====================
+black==23.12.0                      # Code formatter
+flake8==6.1.0                       # Linter
+isort==5.13.2                       # Import sorter
+mypy==1.7.1                         # Type checker
+pylint==3.0.3                       # Code analyzer
